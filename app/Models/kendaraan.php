@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class kendaraan extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
 
     protected $table = 'kendaraan';
     protected $fillable = [
@@ -24,13 +24,13 @@ class kendaraan extends Model
 
         'jumlah_roda',
         'luas_area_kargo',
-        
+
         'ukuran_bagasi',
         'kapasitas_bensin',
     ];
 
     public function transaksi()
     {
-        return $this->hasMany('App\Models\transaksi', 'id_kendaraan', 'id');
+        return $this->hasMany(transaksi::class, 'id_kendaraan');
     }
 }

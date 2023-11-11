@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Models\kendaraan;
 use App\Models\transaksi;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class HomeController extends Controller
 {
@@ -22,13 +23,15 @@ class HomeController extends Controller
     public function index()
     {
         $customer = customer::all();
-        return view('home', ['customer'=>$customer]);
+
+        Debugbar::info($customer);
+        return view('home', ['customer' => $customer]);
     }
 
     public function kendaraan()
     {
         $kendaraan = kendaraan::all();
-        return view('kendaraan.kendaraan', ['kendaraan'=>$kendaraan]);
+        return view('kendaraan.kendaraan', ['kendaraan' => $kendaraan]);
     }
 
     public function transaksi()
@@ -37,6 +40,6 @@ class HomeController extends Controller
         $kendaraan = kendaraan::all();
         $customer = customer::all();
 
-        return view('transaksi.transaksi', ['transaksi'=>$transaksi, 'kendaraan'=>$kendaraan, 'customer'=>$customer]);
+        return view('transaksi.transaksi', ['transaksi' => $transaksi, 'kendaraan' => $kendaraan, 'customer' => $customer]);
     }
 }

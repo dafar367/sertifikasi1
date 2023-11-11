@@ -73,4 +73,44 @@ class KendaraanController extends Controller
         $kendaraan->save();
         return redirect()->route('kendaraan');
     }
+
+    public function edit_kendaraan($id, Request $request)
+    {
+        $kendaraan = kendaraan::find($id);
+
+        // mendapatkan semua value dari request
+        $inputValues = $request->only([
+            'nama_model_kendaraan',
+            'tahun',
+            'manufaktur',
+            'harga',
+            'jumlah_penumpang',
+            'bahan_bakar',
+            'luas_bagasi',
+            'jumlah_roda',
+            'luas_area_kargo',
+            'jumlah_roda',
+            'luas_area_kargo',
+            'ukuran_bagasi',
+            'kapasitas_bensin',
+        ]);
+
+        // Update berdasarkan inputValues
+        $kendaraan->update($inputValues);
+
+        // Save the changes
+        $kendaraan->save();
+
+        return redirect()->route('kendaraan');
+
+    }
+
+    public function delete_kendaraan($id)
+    {
+        $kendaraan = kendaraan::find($id);
+        $kendaraan->delete();
+        return redirect()->back();
+    }
+
+
 }

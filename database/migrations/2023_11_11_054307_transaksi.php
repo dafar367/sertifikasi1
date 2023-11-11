@@ -15,15 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->timestamps();
-            $table->softDeletes();
 
             $table->unsignedBigInteger('id_customer');
             $table->unsignedBigInteger('id_kendaraan');
 
             $table->foreign('id_customer')->references('id')->on('customer')->onDelete('cascade');
             $table->foreign('id_kendaraan')->references('id')->on('kendaraan')->onDelete('cascade');
-
-
         });
     }
 

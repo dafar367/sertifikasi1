@@ -102,23 +102,128 @@
                                         <td>
                                             @if ($cust->id != 0)
                                                 <div class="">
-                                                    <a type="button" class="btn btn-outline-dark" href="{{ route('detail_transaksi', ['id' => $cust->id]) }}">
+                                                    <a type="button" class="btn btn-outline-dark"
+                                                        href="{{ route('detail_transaksi', ['id' => $cust->id]) }}">
                                                         lihat
                                                     </a>
-                                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#hapus_akun{{ $cust->id }}">
+                                                    <button type="button" class="btn btn-outline-dark"
+                                                        data-bs-toggle="modal" data-bs-target="#edit{{ $cust->id }}">
                                                         Edit
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapus_akun{{ $cust->id }}">
+                                                    <button type="button" class="btn btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#delete{{ $cust->id }}">
                                                         Hapus
                                                     </button>
                                                 </div>
                                             @endif
+
+                                            <form action="{{ route('edit_customer', ['id' => $cust->id]) }}" method="post">
+                                                @csrf
+                                                {{ method_field('PUT') }}
+                                                <div class="modal fade" id="edit{{ $cust->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Customer
+                                                                </h5>
+
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <div class="form-group" style="width:100%">
+                                                                    <label>Nama </label>
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $cust->id }}">
+                                                                    <input type="text" name="nama"
+                                                                        class="form-control" placeholder="Nama .."
+                                                                        value="{{ $cust->nama }}" style="width:100%">
+                                                                </div>
+
+                                                                <div class="form-group mt-1">
+                                                                    <label>alamat</label>
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $cust->id }}">
+                                                                    <input type="text" name="alamat"
+                                                                        class="form-control" placeholder="alamat .."
+                                                                        value="{{ $cust->alamat }}" style="width:100%">
+                                                                </div>
+
+                                                                <div class="form-group mt-1">
+                                                                    <label>no telephone</label>
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $cust->id }}">
+                                                                    <input type="text" name="no_telp"
+                                                                        class="form-control" placeholder="no telp .."
+                                                                        value="{{ $cust->no_telp }}" style="width:100%">
+                                                                </div>
+
+
+                                                                <div class="form-group mt-1">
+                                                                    <label>id card</label>
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $cust->id }}">
+                                                                    <input type="text" name="id_card"
+                                                                        class="form-control" placeholder="id card .."
+                                                                        value="{{ $cust->id_card }}" style="width:100%">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary"><i
+                                                                        class="fa fa-paper-plane m-r-5"></i>
+                                                                    Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <form action="{{ route('delete_customer', ['id' => $cust->id]) }}"
+                                                method="post">
+                                                @csrf
+
+                                                <div class="modal fade" id="delete{{ $cust->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                    Customer
+                                                                </h5>
+
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <p>Yakin ingin menghapus data ini?</p>
+
+                                                                @csrf
+                                                                {{ method_field('DELETE') }}
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary"><i
+                                                                        class="fa fa-paper-plane m-r-5"></i>
+                                                                    Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
                                         </td>
                                     </tr>
                                 @endforeach
 
+
+
+
                             </tbody>
-                            </tbody>
+
 
                         </table>
 

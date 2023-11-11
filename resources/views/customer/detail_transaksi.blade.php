@@ -39,60 +39,52 @@
                                 @php
                                     $sequence = 1;
                                 @endphp
-                                @foreach ($transaksi as $index => $cust)
+                                @foreach ($transaksi as $index => $transaksi)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
 
-                                        <td>{{ $cust->kendaraan->nama_model_kendaraan }}</td>
+                                        <td>{{ $transaksi->kendaraan->nama_model_kendaraan }}</td>
 
-                                        <td>{{ $cust->kendaraan->manufaktur }}</td>
+                                        <td>{{ $transaksi->kendaraan->manufaktur }}</td>
 
-                                        <td>{{ $cust->kendaraan->harga }}</td>
+                                        <td>{{ $transaksi->kendaraan->harga }}</td>
 
                                         <td>
 
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                                data-bs-target="#edit{{ $cust->id }}">
+                                                data-bs-target="#edit{{ $transaksi->id }}">
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                                data-bs-target="#hapus_data_pembelian{{ $cust->id }}">
+                                                data-bs-target="#delete{{ $transaksi->id }}">
                                                 Hapus
                                             </button>
 
-                                            <form action="" method="POST">
+                                            <form action="{{route('edit_transaksi', ['id' => $transaksi->id]) }}" method="POST">
                                                 @csrf
-                                                <div class="modal fade" id="edit" tabindex="-1" role="dialog"
+                                                {{ method_field('PUT') }}
+                                                <div class="modal fade" id="edit{{ $transaksi->id }}" tabindex="-1" role="dialog"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                                                <h5 class="modal-title" id="exampleModalLabel">edit transaksi</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <label>Nama Akun</label>
-                                                                    <input type="text" id="nama_akun" name="nama_akun"
-                                                                        required="required" class="form-control" placeholder="Nama Akun">
+                                                                <div class="row mt-4">
+                                                                    <div class="col">
+                                                                        <label>Pilih Kendaraan yang ingin diganti</label><br />
+                                                                        <select name="id_kendaraan" class="form-control p-3" required>
+                                                                            @foreach ($kendaraan as $nt)
+                                                                                <option value="{{ $nt->id }}" {{ $nt->id == $transaksi->kendaraan->id ? 'selected' : '' }}>
+                                                                                    {{ $nt->nama_model_kendaraan }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label>Nomor Akun</label>
-                                                                    <input type="text" id="nomor_akun" name="nomor_akun" required="required"
-                                                                        class="form-control" placeholder="Nomor akun ..">
-                                                                </div>
-                                                                {{-- <div class="form-group">
-                                                                    <label>Pagu</label>
-                                                                    <input type="number" id="pagu" name="pagu"
-                                                                        class="form-control" placeholder="Rp. ">
-                                                                </div> --}}
-
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal"><i
-                                                                        class="ti-close m-r-5 f-s-12"></i> Tutup</button>
                                                                 <button type="submit" class="btn btn-primary"><i
                                                                         class="fa fa-paper-plane m-r-5"></i> Simpan</button>
                                                             </div>
@@ -101,6 +93,38 @@
                                                 </div>
                                             </form>
 
+                                            <form action="{{route('delete_transaksi', ['id' => $transaksi->id]) }}" method="POST">
+                                                @csrf
+                                                <div class="modal fade" id="delete{{ $transaksi->id }}" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">delete transaksi</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row mt-4">
+                                                                    <div class="col">
+                                                                        <div class="modal-body">
+
+                                                                            <p>Yakin ingin menghapus data ini?</p>
+
+                                                                            @csrf
+                                                                            {{ method_field('DELETE') }}
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-danger"><i
+                                                                        class="fa fa-paper-plane m-r-5"></i> Hapus </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

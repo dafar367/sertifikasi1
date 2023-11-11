@@ -36,4 +36,13 @@ Route::post('/store_to_kendaraan_page', [App\Http\Controllers\KendaraanControlle
 Route::post('/store_kendaraan', [App\Http\Controllers\KendaraanController::class, 'store_kendaraan'])->name('store_kendaraan');
 Route::post('/store_transaksi', [App\Http\Controllers\TransaksiController::class, 'store_transaksi'])->name('store_transaksi');
 
-Route::put('/update_transaksi/{id}', [App\Http\Controllers\CustomerController::class, 'update_transaksi'])->name('update_transaksi');
+Route::put('/edit_transaksi/{id}', [App\Http\Controllers\CustomerController::class, 'edit_transaksi'])->name('edit_transaksi');
+Route::put('/edit_customer/{id}', [App\Http\Controllers\CustomerController::class, 'edit_customer'])->name('edit_customer');
+Route::put('/edit_kendaraan/{id}', [App\Http\Controllers\KendaraanController::class, 'edit_kendaraan'])->name('edit_kendaraan');
+
+
+
+Route::delete('/delete_transaksi/{id}', [App\Http\Controllers\CustomerController::class, 'delete_transaksi'])->name('delete_transaksi');
+Route::delete('/delete_customer/{id}', [App\Http\Controllers\CustomerController::class, 'delete_customer'])->name('delete_customer');
+Route::delete('/delete_kendaraan/{id}', [App\Http\Controllers\KendaraanController::class, 'delete_kendaraan'])->name('delete_kendaraan');
+Route::delete('/delete_history_transaksi/{id}', [App\Http\Controllers\TransaksiController::class, 'delete_history_transaksi'])->name('delete_history_transaksi');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('no_telp');
             $table->integer('id_card');
             $table->timestamps();
-            $table->softDeletes();
+
         });
     }
 
