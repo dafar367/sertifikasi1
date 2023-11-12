@@ -24,13 +24,15 @@ class HomeController extends Controller
     {
         $customer = customer::all();
 
-        Debugbar::info($customer);
+        Debugbar::info($customer->toArray());
         return view('home', ['customer' => $customer]);
     }
 
     public function kendaraan()
     {
         $kendaraan = kendaraan::all();
+        Debugbar::info($kendaraan->toArray());
+
         return view('kendaraan.kendaraan', ['kendaraan' => $kendaraan]);
     }
 
@@ -39,6 +41,7 @@ class HomeController extends Controller
         $transaksi = transaksi::all();
         $kendaraan = kendaraan::all();
         $customer = customer::all();
+
 
         return view('transaksi.transaksi', ['transaksi' => $transaksi, 'kendaraan' => $kendaraan, 'customer' => $customer]);
     }

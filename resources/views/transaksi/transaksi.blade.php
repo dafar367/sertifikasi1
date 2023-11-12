@@ -98,11 +98,9 @@
                                             <td>{{ $transaksi->customer->nama }}</td>
 
                                             <td>
-                                                @if ($transaksi->kendaraan)
-                                                    {{ $transaksi->kendaraan->nama_model_kendaraan }}
-                                                @else
-                                                    Kendaraan sudah tdk tersedia
-                                                @endif
+
+                                                {{ $transaksi->kendaraan->nama_model_kendaraan }}
+
                                             </td>
 
 
@@ -115,17 +113,20 @@
                                                             Hapus
                                                         </button>
 
-                                                        <form action="{{ route('delete_history_transaksi', ['id' => $transaksi->id]) }}"
+
+                                                        <form
+                                                            action="{{ route('delete_history_transaksi', ['id' => $transaksi->id]) }}"
                                                             method="post">
                                                             @csrf
 
-                                                            <div class="modal fade" id="delete{{ $transaksi->id }}" tabindex="-1"
-                                                                role="dialog" aria-labelledby="exampleModalLabel"
-                                                                aria-hidden="true">
+                                                            <div class="modal fade" id="delete{{ $transaksi->id }}"
+                                                                tabindex="-1" role="dialog"
+                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                                Delete
                                                                                 History transaksi
                                                                             </h5>
 
@@ -140,7 +141,8 @@
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="submit" class="btn btn-primary"><i
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary"><i
                                                                                     class="fa fa-paper-plane m-r-5"></i>
                                                                                 Simpan</button>
                                                                         </div>
@@ -148,7 +150,7 @@
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                        
+
                                                     </div>
                                                 @endif
                                             </td>

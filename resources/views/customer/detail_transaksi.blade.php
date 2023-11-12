@@ -11,10 +11,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <div class="card">
                     <div class="card-body">
                         <div class="card-header pt-4 text-center">
@@ -22,8 +18,6 @@
                             <h5>Id card : {{ $customer->id_card }}</h5>
                             <br><br>
                         </div>
-
-
                         <table class="table">
                             <thead>
                                 <tr>
@@ -38,6 +32,7 @@
                             <tbody>
                                 @php
                                     $sequence = 1;
+                                    $total_harga = 0;
                                 @endphp
                                 @foreach ($transaksi as $index => $transaksi)
                                     <tr>
@@ -48,6 +43,10 @@
                                         <td>{{ $transaksi->kendaraan->manufaktur }}</td>
 
                                         <td>{{ $transaksi->kendaraan->harga }}</td>
+
+                                        @php
+                                            $total_harga += $transaksi->kendaraan->harga;
+                                        @endphp
 
                                         <td>
 
@@ -60,23 +59,28 @@
                                                 Hapus
                                             </button>
 
-                                            <form action="{{route('edit_transaksi', ['id' => $transaksi->id]) }}" method="POST">
+                                            <form action="{{ route('edit_transaksi', ['id' => $transaksi->id]) }}"
+                                                method="POST">
                                                 @csrf
                                                 {{ method_field('PUT') }}
-                                                <div class="modal fade" id="edit{{ $transaksi->id }}" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="edit{{ $transaksi->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">edit transaksi</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">edit
+                                                                    transaksi</h5>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row mt-4">
                                                                     <div class="col">
-                                                                        <label>Pilih Kendaraan yang ingin diganti</label><br />
-                                                                        <select name="id_kendaraan" class="form-control p-3" required>
+                                                                        <label>Pilih Kendaraan yang ingin
+                                                                            diganti</label><br />
+                                                                        <select name="id_kendaraan" class="form-control p-3"
+                                                                            required>
                                                                             @foreach ($kendaraan as $nt)
-                                                                                <option value="{{ $nt->id }}" {{ $nt->id == $transaksi->kendaraan->id ? 'selected' : '' }}>
+                                                                                <option value="{{ $nt->id }}"
+                                                                                    {{ $nt->id == $transaksi->kendaraan->id ? 'selected' : '' }}>
                                                                                     {{ $nt->nama_model_kendaraan }}
                                                                                 </option>
                                                                             @endforeach
@@ -93,14 +97,16 @@
                                                 </div>
                                             </form>
 
-                                            <form action="{{route('delete_transaksi', ['id' => $transaksi->id]) }}" method="POST">
+                                            <form action="{{ route('delete_transaksi', ['id' => $transaksi->id]) }}"
+                                                method="POST">
                                                 @csrf
-                                                <div class="modal fade" id="delete{{ $transaksi->id }}" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete{{ $transaksi->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">delete transaksi</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">delete
+                                                                    transaksi</h5>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row mt-4">
@@ -128,17 +134,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-                                {{-- modal edit --}}
-
-
                             </tbody>
                             </tbody>
-
                         </table>
-
-
-
+                        <div> total harga : {{ $total_harga }}</div>
                     </div>
                 </div>
             </div>

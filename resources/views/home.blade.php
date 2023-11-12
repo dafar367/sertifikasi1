@@ -26,7 +26,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        {{-- create modal for customer --}}
+                        {{-- modal add   --}}
                         <form action="{{ route('store_customer') }}" method="post">
                             @csrf
                             <div class="modal fade" id="Modal_customer" tabindex="-1" role="dialog"

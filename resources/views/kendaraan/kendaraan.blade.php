@@ -19,7 +19,6 @@
 
                 <div class="card">
                     <div class="card-body">
-                        {{-- create modal for customer --}}
                         <form action="{{ route('store_to_kendaraan_page') }}" method="post">
                             @csrf
                             <div class="modal fade" id="Modal_kendaraan" tabindex="-1" role="dialog"
